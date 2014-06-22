@@ -5,7 +5,7 @@
 
 library(reshape2)
 
-start.analysies <- function(dataDir, saveMeanFile=NA) {
+start.analysis <- function(dataDir, saveMeanFile=NA) {
 
         ##constant
         ### index of the extracted features
@@ -114,4 +114,4 @@ start.analysies <- function(dataDir, saveMeanFile=NA) {
 }
  
 #dataDir ="~/Documents/DataScientist/Module 3 Getting and Cleaning Data/projet/UCI HAR Dataset"
-#start.analysies(dataDir,"cleanData_mean.txt")
+#start.analysis(dataDir,"cleanData_mean.txt")
