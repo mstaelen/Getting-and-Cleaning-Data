@@ -5,38 +5,53 @@
 
 library(reshape2)
 
-start.analysis <- function(dataDir, saveMeanFile=NA) {
+start.analysies <- function(dataDir, saveMeanFile=NA) {
 
         ##constant
         ### index of the extracted features
-        features.extracted.index <- c(34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50
-                                      ,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68
-                                      ,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86
-                                      ,87,88,89,90,91,92,93,94,95,96,97,98,99)
+        features.extracted.index <-c(1, 2, 3, 4, 5, 6, 41, 42, 43, 44, 45, 46, 
+                81,82, 83, 84, 85, 86, 121, 122, 123, 124, 125,126, 161, 162, 
+                163, 164, 165, 166, 201, 202, 214, 215, 227, 228, 240, 241, 253, 
+                254, 266, 267, 268, 269, 270, 271, 345, 346, 347, 348, 349, 350,
+                424, 425, 426, 427, 428, 429, 503, 504, 516, 517, 529, 530, 542, 
+                543)
         ### name of the features
-        features.extracted.names <- c("mean(tBodyAcc-X)","mean(tBodyAcc-Y)"
-                                      ,"mean(tBodyAcc-Z)","mean(tGravityAcc-X)","mean(tGravityAcc-Y)"
-                                      ,"mean(tGravityAcc-Z)","mean(tBodyAccJerk-X)","mean(tBodyAccJerk-Y)"
-                                      ,"mean(tBodyAccJerk-Z)",
-                                      "mean(tBodyGyro-X)","mean(tBodyGyro-Y)","mean(tBodyGyro-Z)",
-                                      "mean(tBodyGyroJerk-X)","mean(tBodyGyroJerk-Y)","mean(tBodyGyroJerk-Z)",
-                                      "mean(tBodyAccMag)","mean(tGravityAccMag)","mean(tBodyAccJerkMag)",
-                                      "mean(tBodyGyroMag)","mean(tBodyGyroJerkMag)","mean(fBodyAcc-X)",
-                                      "mean(fBodyAcc-Y)","mean(fBodyAcc-Z)","mean(fBodyAccJerk-X)",
-                                      "mean(fBodyAccJerk-Y)","mean(fBodyAccJerk-Z)","mean(fBodyGyro-X)",
-                                      "mean(fBodyGyro-Y)","mean(fBodyGyro-Z)","mean(fBodyAccMag)",
-                                      "mean(fBodyAccJerkMag)","mean(fBodyGyroMag)","mean(fBodyGyroJerkMag)",
-                                      "std(tBodyAcc-X)","std(tBodyAcc-Y)","std(tBodyAcc-Z)","std(tGravityAcc-X)",
-                                      "std(tGravityAcc-Y)","std(tGravityAcc-Z)","std(tBodyAccJerk-X)",
-                                      "std(tBodyAccJerk-Y)","std(tBodyAccJerk-Z)","std(tBodyGyro-X)",
-                                      "std(tBodyGyro-Y)","std(tBodyGyro-Z)","std(tBodyGyroJerk-X)",
-                                      "std(tBodyGyroJerk-Y)","std(tBodyGyroJerk-Z)","std(tBodyAccMag)",
-                                      "std(tGravityAccMag)","std(tBodyAccJerkMag)","std(tBodyGyroMag)",
-                                      "std(tBodyGyroJerkMag)","std(fBodyAcc-X)","std(fBodyAcc-Y)",
-                                      "std(fBodyAcc-Z)","std(fBodyAccJerk-X)","std(fBodyAccJerk-Y)",
-                                      "std(fBodyAccJerk-Z)","std(fBodyGyro-X)","std(fBodyGyro-Y)",
-                                      "std(fBodyGyro-Z)","std(fBodyAccMag)","std(fBodyAccJerkMag)",
-                                      "std(fBodyGyroMag)","std(fBodyGyroJerkMag)")
+        features.extracted.names <- c("tBodyAcc-mean()-X", "tBodyAcc-mean()-Y", 
+                                       "tBodyAcc-mean()-Z", "tBodyAcc-std()-X",
+                                "tBodyAcc-std()-Y", "tBodyAcc-std()-Z", 
+                                "tGravityAcc-mean()-X", "tGravityAcc-mean()-Y", 
+                                "tGravityAcc-mean()-Z", "tGravityAcc-std()-X", 
+                                "tGravityAcc-std()-Y", "tGravityAcc-std()-Z", 
+                                "tBodyAccJerk-mean()-X", "tBodyAccJerk-mean()-Y", 
+                                "tBodyAccJerk-mean()-Z", "tBodyAccJerk-std()-X", 
+                                "tBodyAccJerk-std()-Y", "tBodyAccJerk-std()-Z", 
+                                "tBodyGyro-mean()-X", "tBodyGyro-mean()-Y", 
+                                "tBodyGyro-mean()-Z", "tBodyGyro-std()-X", 
+                                "tBodyGyro-std()-Y", "tBodyGyro-std()-Z", 
+                                "tBodyGyroJerk-mean()-X", "tBodyGyroJerk-mean()-Y", 
+                                "tBodyGyroJerk-mean()-Z", "tBodyGyroJerk-std()-X", 
+                                "tBodyGyroJerk-std()-Y", "tBodyGyroJerk-std()-Z", 
+                                "tBodyAccMag-mean()", "tBodyAccMag-std()", 
+                                "tGravityAccMag-mean()", "tGravityAccMag-std()", 
+                                "tBodyAccJerkMag-mean()", "tBodyAccJerkMag-std()",
+                                "tBodyGyroMag-mean()", "tBodyGyroMag-std()",
+                                "tBodyGyroJerkMag-mean()", "tBodyGyroJerkMag-std()",
+                                "fBodyAcc-mean()-X", "fBodyAcc-mean()-Y",
+                                "fBodyAcc-mean()-Z", "fBodyAcc-std()-X",
+                                "fBodyAcc-std()-Y", "fBodyAcc-std()-Z",
+                                "fBodyAccJerk-mean()-X", "fBodyAccJerk-mean()-Y",
+                                "fBodyAccJerk-mean()-Z", "fBodyAccJerk-std()-X",
+                                "fBodyAccJerk-std()-Y", "fBodyAccJerk-std()-Z",
+                                "fBodyGyro-mean()-X", "fBodyGyro-mean()-Y",
+                                "fBodyGyro-mean()-Z", "fBodyGyro-std()-X", 
+                                "fBodyGyro-std()-Y", "fBodyGyro-std()-Z", 
+                                "fBodyAccMag-mean()", "fBodyAccMag-std()", 
+                                "fBodyBodyAccJerkMag-mean()", 
+                                "fBodyBodyAccJerkMag-std()", 
+                                "fBodyBodyGyroMag-mean()",
+                                "fBodyBodyGyroMag-std()", 
+                                "fBodyBodyGyroJerkMag-mean()", 
+                                "fBodyBodyGyroJerkMag-std()")
         
         activities.extracted.index <- c(1, 2, 3, 4, 5, 6)
         activities.extracted.names <- c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS",
@@ -113,5 +128,6 @@ start.analysis <- function(dataDir, saveMeanFile=NA) {
          }
 }
  
+
 #dataDir ="~/Documents/DataScientist/Module 3 Getting and Cleaning Data/projet/UCI HAR Dataset"
-#start.analysis(dataDir,"cleanData_mean.txt")
+#start.analysies(dataDir,"cleanData_mean.txt")
