@@ -3,9 +3,9 @@ Getting-and-Cleaning-Data
 
 Module 3
 
-Load the source and start the analysis with the function : start.analysies
+Load the source and start the analysis with the function : start.analysis
 
-start.analysies(dataDir, saveMeanFile=NA) 
+start.analysis(dataDir, saveMeanFile=NA) 
 dataDir : define the folder with the data
 saveMeanFile :
   NA , to give the result (no file save)
@@ -13,4 +13,4 @@ saveMeanFile :
   
 sample
 dataDir ="~/Documents/DataScientist/Module 3 Getting and Cleaning Data/projet/UCI HAR Dataset"
-start.analysies(dataDir,"cleanData_mean.txt")
+start.analysis(dataDir,"cleanData_mean.txt")
